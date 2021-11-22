@@ -1,0 +1,18 @@
+#firebaseui_container {
+  margin: 0;
+  padding: 0;
+}
+
+#firebaseui_container > div > div.firebaseui-card-content > form > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#firebaseui_container
+  > div
+  > div.firebaseui-card-content
+  > form
+  > ul
+  > li:nth-child(2) {
+  margin: 0;
+}
