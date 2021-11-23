@@ -2,7 +2,11 @@ import React from 'react'
 
 //Firebase
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import firebase from '../firebase/clientApp'
+import {
+  auth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+} from '../firebase/clientApp'
 
 //Mui
 import Box from '@mui/material/Box'
@@ -13,8 +17,8 @@ import Typography from '@mui/material/Typography'
 const uiConfig = {
   signInSuccessUrl: '/',
   signInOptions: [
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    GithubAuthProvider.PROVIDER_ID,
+    GoogleAuthProvider.PROVIDER_ID,
   ],
 }
 
@@ -50,10 +54,7 @@ function SignInScreen(): JSX.Element {
             marginTop: '1rem',
           }}
         >
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </Box>
         <Typography
           sx={{
@@ -78,11 +79,11 @@ function SignInScreen(): JSX.Element {
               gap: '1rem',
             }}
           >
-            <TextField id="outlined-basic" label="First-Name" />
-            <TextField id="outlined-basic" label="Last-Name" />
+            <TextField label="First-Name" variant="outlined" />
+            <TextField label="Last-Name" variant="outlined" />
           </Box>
-          <TextField id="outlined-basic" label="E-mail address" />
-          <TextField id="outlined-basic" label="Password" />
+          <TextField label="E-mail address" variant="outlined" />
+          <TextField label="Password" variant="outlined" />
           <Button variant="contained" size="large">
             Sign up
           </Button>
