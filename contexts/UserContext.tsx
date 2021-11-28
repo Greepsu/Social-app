@@ -8,6 +8,7 @@ import React, {
 import { auth } from '../firebase/clientApp'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { User } from 'firebase/auth'
+import { useRouter } from 'next/router'
 
 type Props = {
   user: User | null
@@ -24,6 +25,13 @@ export const UserContext = createContext<ContextProps>({})
 export function UserContextProvider({ children }: PropsWithChildren<Props>) {
   const [user, loading, error] = useAuthState(auth)
   const values = { user, loading, error }
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user === null && loading === true && router.pathname !== '/auth') {
+      router.push('/auth')
+    }
+  }, [user, loading, error])
 
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>
 }

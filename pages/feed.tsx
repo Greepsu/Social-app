@@ -1,6 +1,6 @@
 import React from 'react'
-import PostInput from '../components/postInput'
-import Post from '../components/post'
+import PostInput from '../components/PostInput'
+import { default as PostComponent } from '../components/Post'
 
 //Mui
 import { Box } from '@mui/system'
@@ -11,9 +11,10 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { firebaseApp } from '../firebase/clientApp'
 
 import { v4 as uuidv4 } from 'uuid'
+import { Post } from '../types/post'
 
 export default function Feed() {
-  const [posts, loading, error] = useCollection(
+  const [posts, loading, error] = useCollection<Post>(
     collection(getFirestore(firebaseApp), 'Posts'),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
@@ -32,15 +33,10 @@ export default function Feed() {
       }}
     >
       <PostInput />
-      {posts?.docs.map((post) => (
-        <Post
-          key={uuidv4()}
-          name={post.data().User}
-          message={post.data().Message}
-          avatar={post.data().Avatar}
-          likes={post.data().Likes}
-        />
-      ))}
+      {posts?.docs.map((postData) => {
+        const post = postData.data()
+        return <PostComponent key={uuidv4()} post={post} />
+      })}
     </Box>
   )
 }

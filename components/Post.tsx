@@ -3,16 +3,10 @@ import { Avatar, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-
-type PostProps = {
-  name?: string
-  message?: string
-  avatar?: string
-  likes?: number
-}
+import { Post } from '../types/post'
 
 //! Gérer les props dans un state ? genre [post, setPost] = useState(name: aaa, message...)
-export default function Post({ name, message, avatar, likes }: PostProps) {
+export default function Post({ post }: { post: Post }) {
   const [clicked, setClicked] = useState(false)
   return (
     <Box
@@ -34,10 +28,10 @@ export default function Post({ name, message, avatar, likes }: PostProps) {
       >
         <Avatar
           sx={{ width: 48, height: 48, marginRight: 3 }}
-          alt={name}
-          src={avatar}
+          alt={post.name}
+          src={post.avatar}
         />
-        <Typography variant="h6">{name}</Typography>
+        <Typography variant="h6">{post.name}</Typography>
       </Box>
       <Typography
         sx={{
@@ -45,13 +39,13 @@ export default function Post({ name, message, avatar, likes }: PostProps) {
         }}
         variant="body1"
       >
-        {message}
+        {post.message}
       </Typography>
       <Box>
         <IconButton onClick={() => setClicked(!clicked)} size="small">
           {clicked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
         </IconButton>
-        <Typography variant="caption"> {likes}</Typography>
+        <Typography variant="caption"> {post.likes}</Typography>
       </Box>
     </Box>
   )
