@@ -6,7 +6,7 @@ import { useUserContext } from '../contexts/UserContext'
 //Mui
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import { InputBase, TextField, Button } from '@mui/material'
+import { TextField, Button } from '@mui/material'
 
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase/clientApp'

@@ -3,26 +3,16 @@ import PostInput from '../components/postInput'
 import Post from '../components/post'
 
 //Mui
-import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
 //Context
-import { useUserContext } from '../contexts/UserContext'
-
-import {
-  getFirestore,
-  collection,
-  collectionGroup,
-  getDocs,
-} from 'firebase/firestore'
+import { getFirestore, collection } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { firebaseApp } from '../firebase/clientApp'
-import { db } from '../firebase/clientApp'
 
 import { v4 as uuidv4 } from 'uuid'
 
 export default function Feed() {
-  const { user } = useUserContext()
   const [posts, loading, error] = useCollection(
     collection(getFirestore(firebaseApp), 'Posts'),
     {
