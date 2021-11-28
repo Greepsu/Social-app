@@ -2,6 +2,12 @@ import { createTheme, PaletteOptions, responsiveFontSizes } from '@mui/material'
 
 const palette: PaletteOptions = {
   mode: 'dark',
+  primary: {
+    light: '#474747',
+    main: '#272727',
+    dark: '#002884',
+    contrastText: '#fff',
+  },
 }
 
 function createBaseTheme() {

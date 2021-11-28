@@ -4,12 +4,17 @@ import { CssBaseline } from '@mui/material'
 import theme from '../utils/theme'
 import '../utils/firebaseui-styling.global.css'
 
+//Context
+import { UserContextProvider } from '../contexts/UserContext'
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <UserContextProvider user={null}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </UserContextProvider>
   )
 }
 

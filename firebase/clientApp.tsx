@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth'
 
+import { getFirestore } from 'firebase/firestore'
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -18,5 +20,13 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig)
 const auth = getAuth(firebaseApp)
+const db = getFirestore(firebaseApp)
 
-export { auth, GithubAuthProvider, GoogleAuthProvider }
+export {
+  auth,
+  firebaseApp,
+  db,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  getFirestore,
+}
