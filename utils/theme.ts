@@ -8,6 +8,12 @@ const palette: PaletteOptions = {
     dark: '#002884',
     contrastText: '#fff',
   },
+  secondary: {
+    light: '#ff7961',
+    main: '#046CDB',
+    dark: '#ba000d',
+    contrastText: '#000',
+  },
 }
 
 function createBaseTheme() {

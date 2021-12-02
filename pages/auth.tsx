@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Firebase
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
@@ -6,6 +6,7 @@ import {
   auth,
   GithubAuthProvider,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from '../firebase/clientApp'
 
 //Mui
@@ -22,8 +23,32 @@ const uiConfig = {
   ],
 }
 
-//! MERDE
+type EmailUser = {
+  email?: string
+  password?: string
+}
+
 function SignInScreen(): JSX.Element {
+  const [emailSign, setEmailSign] = useState<EmailUser | undefined>(undefined)
+  console.log(emailSign)
+
+  const createAccount = async () => {
+    await createUserWithEmailAndPassword(
+      auth,
+      emailSign?.email,
+      emailSign?.password
+    )
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
+      })
+  }
+
   return (
     <Box
       sx={{
@@ -69,23 +94,29 @@ function SignInScreen(): JSX.Element {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            gap: '1rem',
+            width: '350px',
+            gap: '15px',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <TextField label="First-Name" variant="outlined" />
-            <TextField label="Last-Name" variant="outlined" />
-          </Box>
-          <TextField label="E-mail address" variant="outlined" />
-          <TextField label="Password" variant="outlined" />
-          <Button variant="contained" size="large">
+          <TextField
+            color="secondary"
+            label="E-mail address"
+            variant="outlined"
+            type="email"
+            onChange={(e) =>
+              setEmailSign({ ...emailSign, email: e.target.value })
+            }
+          />
+          <TextField
+            color="secondary"
+            label="Password"
+            variant="outlined"
+            type="password"
+            onChange={(e) =>
+              setEmailSign({ ...emailSign, password: e.target.value })
+            }
+          />
+          <Button variant="contained" size="large" onClick={createAccount}>
             Sign up
           </Button>
         </Box>

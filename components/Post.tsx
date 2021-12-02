@@ -5,8 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { Post } from '../types/post'
 
-//! Gérer les props dans un state ? genre [post, setPost] = useState(name: aaa, message...)
-export default function Post({ post }: { post: Post }) {
+export default function PostComponent({ post }: { post: Post }) {
   const [clicked, setClicked] = useState(false)
   return (
     <Box

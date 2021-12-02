@@ -2,8 +2,8 @@ import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   GithubAuthProvider,
-  EmailAuthProvider,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth'
 
 import { getFirestore } from 'firebase/firestore'
@@ -28,5 +28,6 @@ export {
   db,
   GithubAuthProvider,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
   getFirestore,
 }
